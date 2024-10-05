@@ -28,7 +28,8 @@ SECRET_KEY = 'django-insecure-8+fi%yux(ol^g3be$qjcz&9&4@7npt%7#0bsd8k@ml652woyk2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["excellence-academy-3.onrender.com",'127.0.0.1','localhost']
+CSRF_TRUSTED_ORIGINS=['https://excellence-academy-3.onrender.com']
 
 
 # Application definition
