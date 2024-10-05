@@ -1,0 +1,17 @@
+aiodns
+aiosmtpd
+asgiref
+atpublic
+attrs
+cffi
+crispy-bootstrap5
+Django
+django-crispy-forms
+django-environ
+Django-Verify-Email
+pycares
+pycparser
+python-dotenv
+sqlparse
+tzdata
+verify-email
