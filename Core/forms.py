@@ -75,3 +75,9 @@ class UserUpdateForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+    
+
+class UserEducationForm(forms.ModelForm):
+    class Meta:
+        model =models.UserEducation
+        exclude= ('user',)

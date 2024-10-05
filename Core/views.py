@@ -5,6 +5,7 @@ from . import forms
 from django.views.generic import FormView,TemplateView
 # Create your views here.
 from . import forms
+from . import models
 from Tution.models import Application
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
@@ -23,6 +24,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from django.views import View
+from django.contrib.auth.decorators import login_required
 
 
 def register(request):
@@ -61,7 +63,7 @@ def activate(request,uidb64,token):
         user.is_active=True
         user.save()
         login(request,user)
-        return redirect('profile')
+        return redirect('homepage')
     else:
         return render(request,'activation_invalid.html')
 
@@ -84,18 +86,34 @@ class UserLogin(LoginView):
         return reverse_lazy('homepage')
     
         
-
+@login_required
 def user_logout(request):
     logout(request)
     return redirect('login')
 
 
-class userProfileView (TemplateView):
+
+ 
+class userEducation(View):
+    def get(self,request):
+        formss=forms.UserEducationForm()
+        return render(request,'add_education.html',{'formss':formss})
+    def post (self,request):
+        formss=forms.UserEducationForm(request.POST)
+        if formss.is_valid():
+            formss.save()
+            return redirect ('profile')
+        return render (request,'add_education.html',{'formss':formss})
+
+
+
+class userProfileView(TemplateView):
     template_name='profile.html'
 
     def get_context_data(self,**kwargs):
         context=super().get_context_data(**kwargs)
         context['form']=forms.UserUpdateForm(instance=self.request.user)
+        context['education']= models.UserEducation.objects.filter(user=self.request.user)
         context['approved_applications']=Application.objects.filter(user=self.request.user,is_approved=True)
         return context
     

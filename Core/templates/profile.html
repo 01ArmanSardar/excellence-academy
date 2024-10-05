@@ -147,10 +147,10 @@ error in form.non_field_errors %}
 
 </div> {% endcomment %}
 {% if user.is_authenticated %}
-<h2 class="" style="text-align: center;"> welcome {{user.first_name}} profile</h2>
+<h2 class="" style="text-align: center;"> this profile owner is {{user.first_name}}</h2>
 <div class="d-flex justify-content-around">
     <div>
-        <h6>update your profile information</h6>
+        <h3>update your profile information <strong>BELOW</strong></h3>
         <form method="post">
             {%csrf_token%}
             {{form.as_p}}
@@ -158,17 +158,30 @@ error in form.non_field_errors %}
         </form>
     </div>
     <div>
-        <h1>your approved applications is below</h1>
+        <h1 style="color: rgb(14, 91, 192);">your approved applications is below</h1>
         <ul>
             {% for application in approved_applications %}
 
-            <li>{{application.tution.title}}</li>
+            <li>your Apply for <h5>{{application.tution.title}}</h5> subject is approved</li>
             {%empty%}
             <li>no approved tuitions yet.</li>
 
             {% endfor %}
         </ul>
     </div>
+</div>
+
+<div>
+    <h1>education</h1>
+    <ul>
+        {% for edu in education %}
+
+        <li>{{edu.UserEducation.schoolName}}</li>
+        {%empty%}
+        <li>ok</li>
+
+        {% endfor %}
+    </ul>
 </div>
 {% endif %}
 {% endblock %}

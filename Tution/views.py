@@ -24,7 +24,7 @@ def apply_for_tution(request):
             application.user=request.user
             application.save()
             # return redirect('application_success')
-            return HttpResponse ('application success')
+            return redirect ('profile')
     else:
         form=forms.ApplicatioForm()
     tuitions = models.Tution.objects.all()
